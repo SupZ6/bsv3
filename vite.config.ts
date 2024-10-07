@@ -1,8 +1,11 @@
-import { defineConfig } from 'vite'
 import { URL, fileURLToPath } from 'node:url';
-import vue from '@vitejs/plugin-vue'
-import Components from 'unplugin-vue-components/vite'
-import { BootstrapVueNextResolver } from 'bootstrap-vue-next'
+import { defineConfig } from 'vite';
+import unocss from '@unocss/vite';
+import vue from '@vitejs/plugin-vue';
+import Components from 'unplugin-vue-components/vite';
+import vueJsx from '@vitejs/plugin-vue-jsx';
+import VueDevtools from 'vite-plugin-vue-devtools';
+import { BootstrapVueNextResolver } from 'bootstrap-vue-next';
 
 export default defineConfig({
   resolve: {
@@ -21,11 +24,14 @@ export default defineConfig({
   },
   plugins: [
     vue(),
+    vueJsx(),
+    VueDevtools(),
+    unocss(),
     Components({
-      resolvers: [BootstrapVueNextResolver()],
-    }),
+      resolvers: [BootstrapVueNextResolver()]
+    })
   ],
   server: {
     port: 8898
   }
-})
+});

@@ -1,7 +1,8 @@
-<script setup>
-import AppTable from './components/AppTable.vue'
+<script lang="ts" setup>
 </script>
 
 <template>
-  <AppTable />
+  <BContainer class="py-5">
+    <AppTable />
+  </BContainer>
 </template>

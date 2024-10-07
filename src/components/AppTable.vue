@@ -1,6 +1,5 @@
-<script setup>
+<script lang="ts" setup>
 import { ref } from 'vue'
-import { BTable } from 'bootstrap-vue-next'
 
 const tableItems = [
   { isActive: true, age: 23, gender: 1, fullName: '张三' },
@@ -24,28 +23,24 @@ const perPage = ref(4)
 </script>
 
 <template>
-  <BContainer class="py-5">
-    <BTable :sort-by="[{ key: 'fullName', order: 'asc' }]" :items="tableItems" :fields="tableFields"
-      :current-page="currentPage" :per-page="perPage" hover bordered outlined>
-      <template #cell(gender)="row">
-        {{ row.value ? '男' : '女' }}
-      </template>
-      <template #cell(isActive)="row">
-        <div class="active" :class="row.value ? 'is-active' : 'no-active'">{{ row.value ? '已' : '未' }}激活</div>
-      </template>
-    </BTable>
-    <BRow>
-      <BCol>
-        <BPagination v-model="currentPage" :total-rows="totalRows" :per-page="perPage" class="my-0" />
-      </BCol>
-      <BCol class="current">
-        <strong>{{ totalRows }}</strong>条记录, 当前第 <strong>{{ currentPage }}</strong> 页, 共 <strong>{{ Math.ceil(totalRows
-          /
-          perPage) }}</strong> 页
-      </BCol>
-    </BRow>
-
-  </BContainer>
+  <BTable :sort-by="[{ key: 'fullName', order: 'asc' }]" :items="tableItems" :fields="tableFields"
+    :current-page="currentPage" :per-page="perPage" hover bordered outlined>
+    <template #cell(gender)="row">
+      {{ row.value ? '男' : '女' }}
+    </template>
+    <template #cell(isActive)="row">
+      <div class="active" :class="row.value ? 'is-active' : 'no-active'">{{ row.value ? '已' : '未' }}激活</div>
+    </template>
+  </BTable>
+  <BRow>
+    <BCol>
+      <BPagination v-model="currentPage" :total-rows="totalRows" :per-page="perPage" class="my-0" />
+    </BCol>
+    <BCol class="current">
+      <strong>{{ totalRows }}</strong>条记录, 当前第 <strong>{{ currentPage }}</strong> 页,
+      共 <strong>{{ Math.ceil(totalRows / perPage) }}</strong> 页
+    </BCol>
+  </BRow>
 </template>
 
 <style lang="scss" scoped>
